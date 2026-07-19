@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Alongside palette — warm, calm, high-touch */
+  --color-cream: #faf6ef;
+  --color-sand: #f1e9dc;
+  --color-card: #ffffff;
+  --color-ink: #33302b;
+  --color-ink-soft: #6f6a61;
+  --color-ink-faint: #a39d92;
+  --color-terra: #c2603d;
+  --color-terra-deep: #a54e30;
+  --color-terra-soft: #f6e3da;
+  --color-moss: #4f6b58;
+  --color-moss-soft: #e4ece6;
+  --color-alert: #b23a2f;
+  --color-alert-soft: #f9e3e0;
+  --color-amber: #b07d2c;
+  --color-amber-soft: #f8eeda;
+  --color-wa: #dcf3d0;
+
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --shadow-card: 0 1px 3px rgba(51, 48, 43, 0.07), 0 4px 14px rgba(51, 48, 43, 0.05);
+  --shadow-float: 0 -2px 12px rgba(51, 48, 43, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-sand);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  min-height: 100%;
 }
+
+/* Mobile app shell */
+.app-shell {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--color-cream);
+  position: relative;
+  box-shadow: 0 0 40px rgba(51, 48, 43, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Markdown-ish rendering inside chat bubbles */
+.bubble p { margin: 0 0 0.5rem; }
+.bubble p:last-child { margin-bottom: 0; }
+.bubble ul, .bubble ol { margin: 0.25rem 0 0.5rem; padding-left: 1.1rem; }
+.bubble li { margin-bottom: 0.3rem; }
+.bubble strong { font-weight: 650; }
+
+::selection {
+  background: var(--color-terra-soft);
+}
+
+input, textarea, select {
+  outline-color: var(--color-terra);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.25s ease-out; }
+
+@keyframes pulseDot {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+.typing-dot { animation: pulseDot 1.2s infinite ease-in-out; }
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
